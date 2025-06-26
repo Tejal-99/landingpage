@@ -1,16 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PFLPKV9S');</script>
-<!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elegance - Your Premier Dress Brand</title>
+    <title>Elegance - Discover Our Latest Styles</title>
     <!-- Include Tailwind CSS CDN for easy styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom style to apply Inter font and default background/text colors -->
@@ -19,127 +12,237 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             font-family: 'Inter', sans-serif;
             @apply bg-gray-50 text-gray-800; /* Default background and text color */
         }
+        /* Simple animation for hero text */
+        @keyframes fadeInMoveUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInMoveUp 0.8s ease-out forwards;
+        }
+        .animate-fade-in-up.delay-200 {
+            animation-delay: 0.2s;
+        }
+        .animate-fade-in-up.delay-400 {
+            animation-delay: 0.4s;
+        }
     </style>
 </head>
-<body class="antialiased">
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFLPKV9S"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-    <!-- Header Section -->
-    <header class="bg-white shadow-sm py-4 px-6 md:px-8 rounded-b-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo/Site Name -->
-            <a href="#" class="text-2xl font-bold text-pink-600 rounded-md p-2">Elegance</a>
-            <!-- Navigation Menu -->
-            <nav class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Home</a>
-                <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Shop Dresses</a>
-                <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Collections</a>
-                <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">About Us</a>
-                <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Contact</a>
-            </nav>
-            <!-- Mobile Menu Button (Hidden on larger screens) -->
-            <button class="md:hidden text-gray-600 hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-md p-2">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-        </div>
-    </header>
+<body class="antialiased flex flex-col min-h-screen">
+    <!-- Main Landing Page Content - Initially Visible -->
+    <div id="landingPageContent" class="">
+        <!-- Header Section -->
+        <header class="bg-white shadow-sm py-4 px-6 md:px-8 rounded-b-lg">
+            <div class="container mx-auto flex justify-between items-center">
+                <!-- Logo/Site Name -->
+                <a href="#" class="text-2xl font-bold text-pink-600 rounded-md p-2">Elegance</a>
+                <!-- Navigation Menu -->
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Home</a>
+                    <a href="#new-arrivals" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">New Arrivals</a>
+                    <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Shop All</a>
+                    <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Collections</a>
+                    <a href="#" class="text-gray-600 hover:text-pink-600 transition-colors duration-300 rounded-md p-2">Contact</a>
+                    <!-- Cart Icon with Counter -->
+                    <div class="relative ml-4">
+                        <button id="viewCartBtn" class="bg-purple-100 text-purple-700 p-2 rounded-full hover:bg-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-500 relative" title="View Cart">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 1118 0 2 2 0 01-4 0z"></path></svg>
+                            <span id="cartItemCount" class="absolute -top-1 -right-1 bg-pink-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                        </button>
+                    </div>
+                </nav>
+                <!-- Mobile Menu Button (Hidden on larger screens) -->
+                <button class="md:hidden text-gray-600 hover:text-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 rounded-md p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </header>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-20 md:py-32 rounded-lg m-4 md:m-6">
-        <div class="container mx-auto text-center px-4">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
-                Discover Your Perfect Dress
-            </h1>
-            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-90 animate-fade-in-up delay-200">
-                Elegance brings you the latest fashion trends and timeless classics, crafted with passion and precision.
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-pink-500 to-purple-600 text-white py-20 md:py-32 rounded-lg m-4 md:m-6">
+            <div class="container mx-auto text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-up">
+                    Unveiling Elegance: Your Style, Reimagined
+                </h1>
+                <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto opacity-90 animate-fade-in-up delay-200">
+                    Explore our exquisite new collection, where timeless design meets modern sophistication.
+                </p>
+                <a href="#new-arrivals" class="bg-white text-pink-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 animate-fade-in-up delay-400">
+                    Shop New Arrivals
+                </a>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section id="new-arrivals" class="py-16 md:py-24 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">Fresh from the Runway: New Arrivals</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Dress 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                        <img src="https://placehold.co/400x500/FBCFE8/ffffff?text=Floral+Maxi" alt="Floral Maxi Dress" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Enchanted Floral Maxi Dress</h3>
+                        <p class="text-gray-600 mb-4 font-semibold">$149.99</p>
+                        <button class="add-to-cart-btn bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300" data-name="Enchanted Floral Maxi Dress" data-price="149.99">Add to Cart</button>
+                    </div>
+                    <!-- Dress 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                        <img src="https://placehold.co/400x500/F0ABFC/ffffff?text=Silk+Slip" alt="Silk Slip Dress" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Luxurious Silk Slip Dress</h3>
+                        <p class="text-gray-600 mb-4 font-semibold">$110.00</p>
+                        <button class="add-to-cart-btn bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300" data-name="Luxurious Silk Slip Dress" data-price="110.00">Add to Cart</button>
+                    </div>
+                    <!-- Dress 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                        <img src="https://placehold.co/400x500/C4B5FD/ffffff?text=Linen+A-line" alt="Linen A-line Dress" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Effortless Linen A-line Dress</h3>
+                        <p class="text-gray-600 mb-4 font-semibold">$85.50</p>
+                        <button class="add-to-cart-btn bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300" data-name="Effortless Linen A-line Dress" data-price="85.50">Add to Cart</button>
+                    </div>
+                    <!-- Dress 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                        <img src="https://placehold.co/400x500/A78BFA/ffffff?text=Party+Dress" alt="Party Mini Dress" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Sparkling Sequin Party Dress</h3>
+                        <p class="text-gray-600 mb-4 font-semibold">$199.00</p>
+                        <button class="add-to-cart-btn bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300" data-name="Sparkling Sequin Party Dress" data-price="199.00">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <button id="checkoutBtn" class="bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 hidden">
+                        Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action Section (for general shopping) -->
+        <section class="bg-pink-700 text-white py-16 md:py-20 rounded-lg m-4 md:m-6">
+            <div class="container mx-auto text-center px-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Find Your Signature Style Today!</h2>
+                <p class="text-lg mb-8 max-w-xl mx-auto opacity-90">
+                    Explore our full range of exquisite dresses and elevate your wardrobe.
+                </p>
+                <a href="#" class="bg-white text-pink-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
+                    Browse All Collections
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="bg-gray-800 text-gray-300 py-8 px-6 rounded-t-lg">
+            <div class="container mx-auto text-center">
+                <p>&copy; 2025 Elegance. All rights reserved.</p>
+                <div class="mt-4 space-x-4">
+                    <a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Thank You Page Content - Initially Hidden -->
+    <div id="thankYouPageContent" class="hidden flex-grow flex items-center justify-center py-16 md:py-24 px-4">
+        <div class="bg-white p-8 md:p-12 rounded-xl shadow-lg text-center max-w-xl mx-auto">
+            <svg class="mx-auto w-24 h-24 text-green-500 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h1 class="text-3xl md:text-5xl font-extrabold text-gray-900 mb-4">Thank You for Your Order!</h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">
+                Your purchase from Elegance has been successfully processed. We appreciate your business!
             </p>
-            <button class="bg-white text-pink-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 animate-fade-in-up delay-400">
-                Shop New Arrivals
-            </button>
-        </div>
-    </section>
-
-    <!-- New Arrivals Section -->
-    <section class="py-16 md:py-24 px-4">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">New Arrivals</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dress 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                    <img src="https://placehold.co/400x500/FBCFE8/ffffff?text=Elegant+Gown" alt="Elegant Gown" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Elegant Evening Gown</h3>
-                    <p class="text-gray-600 mb-4">$189.99</p>
-                    <button class="bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300">View Details</button>
-                </div>
-                <!-- Dress 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                    <img src="https://placehold.co/400x500/F0ABFC/ffffff?text=Summer+Dress" alt="Summer Dress" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Chic Summer Midi Dress</h3>
-                    <p class="text-gray-600 mb-4">$95.50</p>
-                    <button class="bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300">View Details</button>
-                </div>
-                <!-- Dress 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                    <img src="https://placehold.co/400x500/C4B5FD/ffffff?text=Casual+Wear" alt="Casual Wear" class="mx-auto mb-4 rounded-lg w-full h-auto object-cover">
-                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Comfortable Everyday Dress</h3>
-                    <p class="text-gray-600 mb-4">$65.00</p>
-                    <button class="bg-pink-600 text-white py-2 px-6 rounded-full hover:bg-pink-700 transition-colors duration-300">View Details</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section (re-purposed for brand values) -->
-    <section class="py-16 md:py-24 px-4 bg-gray-100 rounded-lg m-4 md:m-6">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">Why Choose Elegance?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                    <img src="https://placehold.co/100x100/F9A8D4/ffffff?text=Quality" alt="Quality Fabrics Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Premium Quality Fabrics</h3>
-                    <p class="text-gray-600">Experience unparalleled comfort and durability with our carefully selected materials.</p>
-                </div>
-                <!-- Feature 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                    <img src="https://placehold.co/100x100/EC4899/ffffff?text=Trends" alt="Latest Trends Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Always on Trend</h3>
-                    <p class="text-gray-600">Stay fashionable with our frequently updated collections reflecting the latest global trends.</p>
-                </div>
-                <!-- Feature 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-                    <img src="https://placehold.co/100x100/DB2777/ffffff?text=Fit" alt="Perfect Fit Icon" class="mx-auto mb-6 rounded-full">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Designed for Every Body</h3>
-                    <p class="text-gray-600">Our diverse range of sizes and styles ensures a perfect fit for every silhouette.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action Section -->
-    <section class="bg-pink-700 text-white py-16 md:py-20 rounded-lg m-4 md:m-6">
-        <div class="container mx-auto text-center px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Find Your Signature Style Today!</h2>
-            <p class="text-lg mb-8 max-w-xl mx-auto opacity-90">
-                Explore our full range of exquisite dresses and elevate your wardrobe.
+            <p class="text-gray-600 mb-8">
+                A confirmation email with your order details has been sent to your inbox.
             </p>
-            <button class="bg-white text-pink-700 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-200 transition-all duration-300 transform hover:scale-105">
-                Browse All Collections
+            <button id="continueShoppingBtn" class="bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-pink-700 transition-all duration-300 transform hover:scale-105">
+                Continue Shopping
             </button>
+            <a href="#" class="block mt-6 text-pink-600 hover:text-pink-800 transition-colors duration-300">View Order History</a>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 text-gray-300 py-8 px-6 rounded-t-lg">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2025 Elegance. All rights reserved.</p>
-            <div class="mt-4 space-x-4">
-                <a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition-colors duration-200">Terms of Service</a>
-            </div>
-        </div>
-    </footer>
+    <script>
+        // Initialize an empty cart array
+        let cart = [];
+
+        // Get references to elements
+        const landingPageContent = document.getElementById('landingPageContent');
+        const thankYouPageContent = document.getElementById('thankYouPageContent');
+        const cartItemCount = document.getElementById('cartItemCount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+        const viewCartBtn = document.getElementById('viewCartBtn'); // Added for the cart icon/button
+
+        // Function to update the cart count in the header
+        function updateCartCount() {
+            if (cart.length > 0) {
+                cartItemCount.textContent = cart.length;
+                cartItemCount.classList.remove('hidden');
+                checkoutBtn.classList.remove('hidden'); // Show checkout button when items are in cart
+            } else {
+                cartItemCount.classList.add('hidden');
+                checkoutBtn.classList.add('hidden'); // Hide checkout button when cart is empty
+            }
+        }
+
+        // Function to add item to cart
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            updateCartCount();
+            // Optional: Provide a visual cue that item was added, e.g., brief text change on button
+            console.log(`Added "${productName}" to cart. Cart:`, cart);
+        }
+
+        // Function to simulate checkout and show thank you page
+        function showThankYouPage() {
+            landingPageContent.classList.add('hidden'); // Hide landing page
+            thankYouPageContent.classList.remove('hidden'); // Show thank you page
+            cart = []; // Clear the cart after checkout
+            updateCartCount(); // Update cart display (should be 0)
+        }
+
+        // Function to return to the landing page
+        function returnToLandingPage() {
+            thankYouPageContent.classList.add('hidden'); // Hide thank you page
+            landingPageContent.classList.remove('hidden'); // Show landing page
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Event listener for all "Add to Cart" buttons
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.dataset.name;
+                    const price = parseFloat(this.dataset.price);
+                    addToCart(productName, price);
+                });
+            });
+
+            // Event listener for the "Proceed to Checkout" button
+            checkoutBtn.addEventListener('click', showThankYouPage);
+
+            // Event listener for the "Continue Shopping" button on the thank you page
+            continueShoppingBtn.addEventListener('click', returnToLandingPage);
+
+            // Event listener for the "View Cart" button (optional, for viewing cart details)
+            // For this dummy, it will also trigger checkout for simplicity.
+            viewCartBtn.addEventListener('click', () => {
+                if (cart.length > 0) {
+                    showThankYouPage(); // Directly go to thank you as a dummy checkout
+                } else {
+                    console.log("Cart is empty!");
+                    // In a real app, you might show a "cart is empty" message or redirect to shop
+                }
+            });
+
+            // Initial cart count update
+            updateCartCount();
+        });
+    </script>
 </body>
 </html>
